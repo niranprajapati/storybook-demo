@@ -81,7 +81,7 @@ export function PricingCard({
           variant={ctaVariant}
           size="md"
           className="w-full justify-center"
-          onClick={() => setSelected(true)}
+          onClick={() => setSelected(prev => !prev)}
         >
           {ctaLabel}
         </Button>
