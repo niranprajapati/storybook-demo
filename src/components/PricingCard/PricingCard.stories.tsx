@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { userEvent, within, expect } from 'storybook/test';
 import { PricingCard } from './PricingCard';
 
 // PricingCard imports Badge, PriceTag, and Button directly from their component
@@ -90,5 +91,34 @@ export const Playground: Story = {
     ctaVariant: 'primary',
     featured: false,
     badgeLabel: 'Most Popular',
+  },
+};
+
+// Interaction test: clicks the CTA and asserts the selected state appears.
+// featured: false so the Selected badge is unambiguous (no other badge present).
+export const SelectCard: Story = {
+  args: {
+    tier: 'Pro',
+    description: 'For growing teams that need more power.',
+    price: { currency: '$', amount: 29, period: '/mo' },
+    features: [
+      'Unlimited projects',
+      '100 GB storage',
+      'Advanced analytics',
+      'Priority support',
+      'Custom integrations',
+    ],
+    ctaLabel: 'Get started',
+    ctaVariant: 'primary',
+    featured: false,
+    badgeLabel: 'Most Popular',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const cta = canvas.getByRole('button', { name: /get started/i });
+    await userEvent.click(cta);
+
+    expect(canvas.getByText('Selected')).toBeInTheDocument();
   },
 };

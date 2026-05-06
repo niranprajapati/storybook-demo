@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import clsx from 'clsx';
 import { Badge } from '../Badge/Badge';
 import { Button, type ButtonProps } from '../Button/Button';
@@ -32,14 +33,26 @@ export function PricingCard({
   featured = false,
   badgeLabel = 'Most Popular',
 }: PricingCardProps) {
+  const [selected, setSelected] = useState(false);
+
   return (
     <div
       className={clsx(
         'flex flex-col rounded-2xl bg-white shadow-sm w-full max-w-xs border',
         'p-6', // Chromatic regression target — presenter changes this to p-8 during the live demo
-        featured ? 'border-2 border-indigo-500' : 'border-gray-200',
+        selected
+          ? 'border-2 border-emerald-500'
+          : featured
+            ? 'border-2 border-indigo-500'
+            : 'border-gray-200',
       )}
     >
+      {selected && (
+        <div className="mb-2">
+          <Badge variant="success">Selected</Badge>
+        </div>
+      )}
+
       {featured && (
         <div className="mb-4">
           <Badge variant="info">{badgeLabel}</Badge>
@@ -63,7 +76,12 @@ export function PricingCard({
       </ul>
 
       <div className="mt-8">
-        <Button variant={ctaVariant} size="md" className="w-full justify-center">
+        <Button
+          variant={ctaVariant}
+          size="md"
+          className="w-full justify-center"
+          onClick={() => setSelected(true)}
+        >
           {ctaLabel}
         </Button>
       </div>
