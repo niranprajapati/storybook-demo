@@ -119,6 +119,6 @@ export const SelectCard: Story = {
     const cta = canvas.getByRole('button', { name: /get started/i });
     await userEvent.click(cta);
 
-    expect(canvas.getByText('Selected')).toBeInTheDocument();
+    await expect(canvas.getByText('Selected')).toBeInTheDocument();
   },
 };

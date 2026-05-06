@@ -48,7 +48,7 @@ export function PricingCard({
       )}
     >
       {selected && (
-        <div className="mb-2">
+        <div className="mb-4">
           <Badge variant="success">Selected</Badge>
         </div>
       )}
