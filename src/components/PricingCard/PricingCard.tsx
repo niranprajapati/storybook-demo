@@ -37,6 +37,7 @@ export function PricingCard({
 
   return (
     <div
+      data-testid="pricing-card"
       className={clsx(
         'flex flex-col rounded-2xl bg-white shadow-sm w-full max-w-xs border',
         'p-6', // Chromatic regression target — presenter changes this to p-8 during the live demo

@@ -120,5 +120,6 @@ export const SelectCard: Story = {
     await userEvent.click(cta);
 
     await expect(canvas.getByText('Selected')).toBeInTheDocument();
+    await expect(canvas.getByTestId('pricing-card')).toHaveClass('border-emerald-500');
   },
 };
