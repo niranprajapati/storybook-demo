@@ -121,7 +121,7 @@ export const ToggleCard: Story = {
     await expect(canvas.getByTestId('pricing-card')).toHaveClass('border-emerald-500');
 
     await userEvent.click(cta);
-    await expect(canvas.queryByText('Selected')).not.toBeInTheDocument();
+    await expect(canvas.getByTestId('pricing-card')).not.toHaveTextContent('Selected');
     await expect(canvas.getByTestId('pricing-card')).not.toHaveClass('border-emerald-500');
   },
 };
